@@ -8,6 +8,7 @@ const Navbar = (props: Props) => {
   return (
     <nav
       className={classNames({
+        "md:hidden": true,
         "bg-white text-zinc-500": true, // colors
         "flex items-center": true, // layout
         "w-full fixed z-10 px-4 shadow-sm h-16": true, //positioning & styling

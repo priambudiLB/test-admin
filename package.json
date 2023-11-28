@@ -1,6 +1,7 @@
 {
   "name": "next-daisyui-starter",
   "version": "0.1.0",
+  "proxy": "http://52.221.193.110:3000",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -14,6 +15,8 @@
     "next": "13.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.48.2",
+    "swr": "^2.2.4",
     "usehooks-ts": "2.6.0"
   },
   "devDependencies": {
