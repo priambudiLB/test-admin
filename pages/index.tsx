@@ -1,9 +1,11 @@
 import { NextPage } from "next";
 import Image from "next/image";
+import { useRouter } from 'next/router'
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form"
 import iTILESLogo from '../components/layout/iTILES_Logo_Solid.png';
 import { useLogin } from "api/auth";
+import { ACCESS_TOKEN_KEY } from 'consts'
 
 type Inputs = {
   email: string
@@ -11,17 +13,20 @@ type Inputs = {
 }
 
 const Page: NextPage = () => {
+  const router = useRouter()
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors },
   } = useForm<Inputs>()
   const { trigger, isLoading } = useLogin();
-  // console.log(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`)
   const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
-    console.log(email, password)
-    trigger({ username: email, password })
+    try {
+      const result = await trigger({ username: email, password })
+      localStorage.setItem(ACCESS_TOKEN_KEY, JSON.stringify(result.object))
+      router.push("/clients");
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   return (
@@ -33,7 +38,6 @@ const Page: NextPage = () => {
           height={100}
           alt="Picture of the author"
           className="mx-auto"
-        // style={{ left: '649px', top: '262px', position: 'absolute' }}
         />
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Login
