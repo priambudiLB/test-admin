@@ -1,12 +1,12 @@
 {
-  "name": "next-daisyui-starter",
-  "version": "0.1.0",
+  "name": "itiles-dashboard",
+  "version": "1.0.0",
   "proxy": "http://52.221.193.110:3000",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3001",
     "lint": "next lint"
   },
   "dependencies": {

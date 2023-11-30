@@ -5,6 +5,9 @@ import Image from "next/image";
 import { defaultNavItems } from "./defaultNavItems";
 import { useOnClickOutside } from "usehooks-ts";
 import iTILESLogo from './iTILES_Logo_Solid.png';
+import { Button } from "flowbite-react";
+import { ACCESS_TOKEN_KEY } from "consts";
+import { useRouter } from "next/router";
 
 // define a NavItem prop
 export type NavItem = {
@@ -20,6 +23,13 @@ type Props = {
 };
 const Sidebar = ({ open, navItems = defaultNavItems, setOpen }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
+  const router = useRouter()
+
+  const handleLogout = () => {
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
+    router.push('/')
+  }
+
   useOnClickOutside(ref, (e) => {
     setOpen(false);
   });
@@ -51,7 +61,7 @@ const Sidebar = ({ open, navItems = defaultNavItems, setOpen }: Props) => {
               <Link key={index} href={item.href}>
                 <li
                   className={classNames({
-                    "text-indigo-100 hover:bg-indigo-900": true, //colors
+                    "text-gray-800 hover:bg-gray-200": true, //colors
                     "flex gap-4 items-center ": true, //layout
                     "transition-colors duration-300": true, //animation
                     "rounded-md p-2 mx-2": true, //self style
@@ -65,9 +75,9 @@ const Sidebar = ({ open, navItems = defaultNavItems, setOpen }: Props) => {
         </ul>
       </nav>
       {/* account  */}
-      {/* <div className="border-t border-t-indigo-800 p-4">
+      <div className="border-t border-t-indigo-800 p-4">
         <div className="flex gap-4 items-center">
-          <Image
+          {/* <Image
             src={
               "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
             }
@@ -75,15 +85,15 @@ const Sidebar = ({ open, navItems = defaultNavItems, setOpen }: Props) => {
             width={36}
             alt="profile image"
             className="rounded-full"
-          />
+          /> */}
           <div className="flex flex-col ">
-            <span className="text-indigo-50 my-0">Tom Cook</span>
-            <Link href="/" className="text-indigo-200 text-sm">
-              View Profile
-            </Link>
+            {/* <span className="text-gray-800 my-0">Tom Cook</span> */}
+            <Button onClick={handleLogout} className="text-red-600 text-sm">
+              Log Out
+            </Button>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

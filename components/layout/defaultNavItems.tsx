@@ -9,8 +9,8 @@ import { NavItem } from "./Sidebar";
 
 export const defaultNavItems: NavItem[] = [
   {
-    label: "Clients",
-    href: "/clients",
+    label: "Organizations",
+    href: "/organizations",
   },
   {
     label: "Games",
